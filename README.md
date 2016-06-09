@@ -15,7 +15,7 @@ docker run -d -p 8080:80 kalumkalac/shaarli
 It's recommanded, if you have several applications on your server, to use a reverse proxy such as Nginx, which can additionnally handle SSL termination.
 
 Here is an example of configuration to pu in */etc/nginx/sites-enabled*:
-```php
+```
 server {
   listen 80;
   server_name exeample.com;
