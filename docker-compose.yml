@@ -6,7 +6,7 @@ services:
      - /usr/share/nginx/shaarli/data
     restart: always
   shaarli:
-    image: shaarli
+    image: kalumkalac/shaarli
     ports:
      - 8080:80
     volumes_from:
