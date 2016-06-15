@@ -1,0 +1,14 @@
+version: '2'
+services:
+  data:
+    image: tianon/true
+    volumes:
+     - /usr/share/nginx/shaarli/data
+    restart: always
+  shaarli:
+    image: shaarli
+    ports:
+     - 8080:80
+    volumes_from:
+     - data
+    restart: always
