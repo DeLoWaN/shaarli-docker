@@ -9,6 +9,23 @@ It is buit on [PHP-FPM/Nginx](https://hub.docker.com/r/richarvey/nginx-php-fpm/)
 Use the docker-compose.yml file provided. You need to install [docker-compose](https://docs.docker.com/compose/install/) version 2.
 Remember to edit the port exposed by the shaarli container.
 
+```
+version: '2'
+services:
+  data:
+    image: tianon/true
+    volumes:
+     - /usr/share/nginx/shaarli/data
+    restart: always
+  shaarli:
+    image: shaarli
+    ports:
+     - 8080:80
+    volumes_from:
+     - data
+    restart: always
+```
+
 ### Using docker-compose
 
 ```bash
