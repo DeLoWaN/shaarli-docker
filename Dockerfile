@@ -1,19 +1,17 @@
-FROM richarvey/nginx-php-fpm:latest
-# Change rootdir since it's a volume in base image, we can't write in this folder
-RUN apt-get update
-RUN apt-get -y install wget
-RUN sed "s#/usr/share/nginx/html#/usr/share/nginx/shaarli#" -i /etc/nginx/sites-enabled/default.conf
-RUN sed "s#display_errors = On#display_errors = Off#" -i /etc/php5/fpm/php.ini
+FROM richarvey/nginx-php-fpm:php5
+RUN sed "s#/var/www/html#/usr/share/shaarli#" -i /etc/nginx/sites-enabled/default.conf
+RUN sed '/server_name/d' -i /etc/nginx/sites-enabled/default.conf
+RUN sed "s#display_errors = On#display_errors = Off#" -i /etc/php5/php.ini 
 ADD shaarli.sh /shaarli.sh
 
-WORKDIR /usr/share/nginx/
+WORKDIR /usr/share/
 RUN git clone https://github.com/shaarli/Shaarli.git -b v0.7.0 shaarli
-WORKDIR /usr/share/nginx/shaarli
+WORKDIR /usr/share/shaarli
 RUN chmod -R a+wx cache data pagecache tmp
 
 # Expose Ports
 EXPOSE 443
 EXPOSE 80
 
-VOLUME ["/usr/share/nginx/shaarli/data"]
+VOLUME ["/usr/share/shaarli/data"]
 CMD ["/bin/bash", "/shaarli.sh"]

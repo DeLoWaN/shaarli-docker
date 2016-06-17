@@ -3,7 +3,7 @@ services:
   data:
     image: tianon/true
     volumes:
-     - /usr/share/nginx/shaarli/data
+     - /usr/share/shaarli/data
     restart: always
   shaarli:
     image: kalumkalac/shaarli
